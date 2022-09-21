@@ -1,24 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
+import MainMenu from "./app/screens/MainMenu";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-
-  const handlePress = () => console.log("https://www.youtube.com/watch?v=0-S5a0eXPoc");
-
-  return (
-    <View style={styles.container}>
-      <Text>Welcome to Storyboook!</Text>
-      <Button title="click to get Link to this tutorial" onPress={handlePress}></Button>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <WelcomeScreen />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});
+
+/*
+
+      <Image
+        style={{
+          width: 200,
+          height: 200,
+          position: "absolute",
+          top: landscape ? 80 : 100,
+
+          alignSelf: "center",
+        }}
+        source={require("./assets/PlaceholderLogo.png")}
+      />
+
+
+<View className="Login_Buttons" style={{ flex: 1 }}>
+        <Button title="Login" />
+        <Button title="Register" />
+        <Button
+          title="Skip"
+          onPress={() =>
+            Alert.alert(
+              "Skip Login",
+              "Are you sure you want to skip the login? The progress and favourite books will not get saved.",
+              [
+                { text: "Yes", onPress: () => console.log("Yes") },
+                { text: "No" },
+              ]
+            )
+          }
+        />
+      </View>
+      */
