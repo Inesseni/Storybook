@@ -1,44 +1,24 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import MainMenu from "./app/screens/MainMenu";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
+import Card from "./app/components/Card";
+import BookReadingScreen from "./app/screens/BookReadingScreen";
+
 export default function App() {
-  return <WelcomeScreen />;
+  return (
+    <BookReadingScreen
+      storyTitle={"Story title"}
+      storyText={"Thius is a nabdfjksahf basic test with no special characters"}
+      storyCover={
+        "https://i.pinimg.com/564x/43/5e/0a/435e0a6ea7c12a7dd38834da6915150c.jpg"
+      }
+    />
+  );
 }
 
-const styles = StyleSheet.create({});
-
 /*
-
-      <Image
-        style={{
-          width: 200,
-          height: 200,
-          position: "absolute",
-          top: landscape ? 80 : 100,
-
-          alignSelf: "center",
-        }}
-        source={require("./assets/PlaceholderLogo.png")}
-      />
-
-
-<View className="Login_Buttons" style={{ flex: 1 }}>
-        <Button title="Login" />
-        <Button title="Register" />
-        <Button
-          title="Skip"
-          onPress={() =>
-            Alert.alert(
-              "Skip Login",
-              "Are you sure you want to skip the login? The progress and favourite books will not get saved.",
-              [
-                { text: "Yes", onPress: () => console.log("Yes") },
-                { text: "No" },
-              ]
-            )
-          }
-        />
-      </View>
-      */
+<WelcomeScreen />;
+*/

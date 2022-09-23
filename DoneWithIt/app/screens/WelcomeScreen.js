@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Button,
   Image,
   ImageBackground,
   Pressable,
   StyleSheet,
   Text,
-  View,
   Alert,
 } from "react-native";
+
+import AppButton from "../components/AppButton";
 
 function WelcomeScreen(props) {
   return (
@@ -24,16 +24,15 @@ function WelcomeScreen(props) {
         style={styles.LogoImg}
         source={require("../assets/PlaceholderLogo.png")}
       />
-      <Pressable style={styles.Button}>
-        <Text style={styles.ButtonText}>Login</Text>
-      </Pressable>
 
-      <Pressable style={styles.Button}>
-        <Text style={styles.ButtonText}>Register</Text>
-      </Pressable>
+      <AppButton
+        title="Login"
+        color="secondary"
+        onPress={() => console.log("login")}
+      />
+      <AppButton title="Register" onPress={() => console.log("register")} />
 
       <Pressable
-        style={styles.Button}
         onPress={() =>
           Alert.alert(
             "Skip Login",
@@ -42,7 +41,7 @@ function WelcomeScreen(props) {
           )
         }
       >
-        <Text style={styles.ButtonText}>Skip</Text>
+        <Text style={styles.skipButton}>Skip</Text>
       </Pressable>
     </ImageBackground>
   );
@@ -62,24 +61,15 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 30,
   },
-  Button: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: "white",
-    width: "90%",
-    height: 50,
-    marginBottom: 10,
-  },
-  ButtonText: {
+
+  skipButton: {
+    marginTop: 10,
     fontSize: 16,
     lineHeight: 21,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "black",
+    textDecorationLine: "underline",
   },
 });
 
