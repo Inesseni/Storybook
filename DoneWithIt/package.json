@@ -11,7 +11,9 @@
   "dependencies": {
     "@expo/webpack-config": "^0.16.19",
     "@react-native-community/hooks": "^2.8.1",
+    "constants": "^0.0.2",
     "expo": "~46.0.9",
+    "expo-constants": "^13.2.4",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
