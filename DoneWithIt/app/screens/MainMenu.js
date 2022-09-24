@@ -8,40 +8,54 @@ import {
   View,
 } from "react-native";
 import Card from "../components/Card";
+import UserWidget from "../components/UserWidget";
 import colors from "../config/colors";
+import SpaceInBetween from "../components/SpaceInBetween";
 
 const stories = [
   {
     id: 1,
-    title: "Story 1",
-    description: "D1",
-    image: require("../assets/icon.png"),
+    title: "The little prince",
+    description:
+      "The adventures of the little prince and his friends, escaping the castle and playing in the forbidden forest.",
+    image: require("../assets/Story1.jpg"),
+    bookmarked: true,
   },
   {
     id: 2,
-    title: "Story 2",
-    description: "D2",
-    image: require("../assets/icon.png"),
+    title: "Maria and the brave knights",
+    description:
+      "Nobody can enter the castle, only if your name is Buddy and you have four paws and a wet nose.",
+    image: require("../assets/Story2.jpg"),
+    bookmarked: false,
   },
   {
     id: 3,
-    title: "Story 3",
-    description: "D3",
-    image: require("../assets/icon.png"),
+    title: "Treasure island",
+    description:
+      "Go on a crazy pirate adventure with Joanne and Fitus, the orange cat.",
+    image: require("../assets/Story3.jpg"),
+    bookmarked: false,
   },
   {
     id: 4,
     title: "Story 4",
     description: "D4",
-    image: require("../assets/icon.png"),
+    image: require("../assets/Story4.jpg"),
+    bookmarked: false,
   },
 ];
 
 function MainMenu(props) {
   return (
     <View>
-      <View style={styles.saveView} />
-      <Text style={styles.greeting}>Hi User!</Text>
+      <SpaceInBetween gap={60} color={colors.white} />
+
+      <UserWidget
+        userName={"Ines"}
+        userStats={5}
+        userPicture={require("../assets/userPic.jpg")}
+      />
       <FlatList
         style={styles.listContainer}
         data={stories}
@@ -52,6 +66,8 @@ function MainMenu(props) {
             description={item.description}
             image={item.image}
             onPress={() => console.log("story selected", item)}
+            margin={15}
+            bookmarked={item.bookmarked}
           />
         )}
       />
@@ -62,14 +78,6 @@ function MainMenu(props) {
 const styles = StyleSheet.create({
   listContainer: {
     backgroundColor: colors.background,
-  },
-  greeting: {
-    fontSize: 30,
-    padding: 20,
-    paddingLeft: 30,
-  },
-  saveView: {
-    height: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
 

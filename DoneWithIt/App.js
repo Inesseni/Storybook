@@ -6,6 +6,7 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import Card from "./app/components/Card";
 import BookReadingScreen from "./app/screens/BookReadingScreen";
+import MyAccountScreen from "./app/screens/MyAccountScreen";
 
 export default function App() {
   return <MainMenu />;
@@ -13,6 +14,7 @@ export default function App() {
 
 /*
 <WelcomeScreen />;
+<MainMenu />
 
 <BookReadingScreen
   storyTitle={"Story title"}
