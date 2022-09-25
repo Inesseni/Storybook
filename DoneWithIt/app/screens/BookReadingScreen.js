@@ -10,7 +10,7 @@ function BookReadingScreen({ storyTitle, storyText, storyCover }) {
           source={{
             height: "100%",
             width: "100%",
-            uri: { storyCover },
+            uri: storyCover,
           }}
         />
         <Text style={styles.storyTitle}>{storyTitle}</Text>
@@ -39,3 +39,12 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
 });
+
+/*
+source={{
+        height: "100%",
+        width: "100%",
+        uri: "https://i.pinimg.com/564x/43/5e/0a/435e0a6ea7c12a7dd38834da6915150c.jpg",
+      }}
+
+      */

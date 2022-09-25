@@ -2,8 +2,19 @@ import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import { FontAwesome } from "@expo/vector-icons";
+import SpaceInBetween from "./SpaceInBetween";
+import ReviewStars from "./ReviewStars";
 
-function Card({ title, description, image, bookmarked, onPress, margin }) {
+function Card({
+  title,
+  author,
+  description,
+  image,
+  bookmarked,
+  onPress,
+  margin,
+  rating,
+}) {
   return (
     <TouchableOpacity
       style={[styles.card, { margin: margin, marginTop: margin + 10 }]}
@@ -22,6 +33,30 @@ function Card({ title, description, image, bookmarked, onPress, margin }) {
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{description}</Text>
+        <SpaceInBetween gap={10} />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={styles.author}>{author}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            <ReviewStars size={15} />
+            <ReviewStars size={15} />
+            <ReviewStars size={15} />
+            <ReviewStars size={15} />
+            <ReviewStars size={15} />
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -30,6 +65,10 @@ function Card({ title, description, image, bookmarked, onPress, margin }) {
 export default Card;
 
 const styles = StyleSheet.create({
+  author: {
+    color: colors.black,
+    textAlign: "right",
+  },
   bookmark: {
     position: "absolute",
     zIndex: 2,
@@ -50,15 +89,22 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   detailsContainer: {
-    padding: 10,
+    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 15,
   },
   title: {
-    marginBottom: 7,
     fontWeight: "bold",
     fontSize: 20,
+    marginBottom: 5,
   },
   subtitle: {
-    color: colors.black,
+    color: colors.darkgrey,
+    fontSize: 14,
+    lineHeight: 20,
+    paddingBottom: 10,
+    borderBottomColor: colors.grey,
+    borderBottomWidth: 1,
   },
 });
 

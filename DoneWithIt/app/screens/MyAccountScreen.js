@@ -4,7 +4,6 @@ import IconButton from "../components/IconButton";
 import UserWidget from "../components/UserWidget";
 import SpaceInBetween from "../components/SpaceInBetween";
 import colors from "../config/colors";
-import { LinearGradient } from "expo-linear-gradient";
 
 function MyAccountScreen(props) {
   return (
@@ -18,27 +17,21 @@ function MyAccountScreen(props) {
       <SpaceInBetween gap={40} />
       <IconButton
         text={"My Library"}
-        Icon={"format-list-bulleted"}
+        Icon={"bookshelf"}
         BG_Color={colors.primary}
-        I_color={colors.white}
-        I_size={20}
         onPress={() => console.log("My Library")}
       />
       <IconButton
         text={"Settings"}
-        Icon={"email"}
+        Icon={"pencil"}
         BG_Color={colors.yellow}
-        I_color={colors.white}
-        I_size={20}
         onPress={() => console.log("Settings")}
       />
       <SpaceInBetween gap={10} />
       <IconButton
         text={"Log Out"}
-        Icon={"logout"}
+        Icon={"microphone-plus"}
         BG_Color={colors.red}
-        I_color={colors.white}
-        I_size={20}
         onPress={() => console.log("Log out")}
       />
     </View>

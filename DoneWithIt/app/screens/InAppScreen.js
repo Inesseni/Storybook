@@ -1,12 +1,12 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { FlatList, StyleSheet, View, Text } from "react-native";
-import DiscoverScreen from "./app/screens/DiscoverScreen";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
+import MainMenu from "./MainMenu";
+import WelcomeScreen from "./WelcomeScreen";
 
 import Card from "./app/components/Card";
 import BookReadingScreen from "./app/screens/BookReadingScreen";
-import MyAccountScreen from "./app/screens/MyAccountScreen";
+import MyAccountScreen from "./MyAccountScreen";
 import colors from "./app/config/colors";
 import NavbarBottom from "./app/components/NavbarBottom";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -16,14 +16,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SpaceInBetween from "./app/components/SpaceInBetween";
-import FeedScreen from "./app/screens/FeedScreen";
 
 function HomeScreen() {
-  return <FeedScreen />;
+  return <MainMenu />;
 }
 
-function DiscoverScreeen() {
-  return <DiscoverScreen />;
+function DiscoverScreen() {
+  return <MainMenu />;
 }
 
 function RecordingsScreen() {
@@ -36,7 +35,7 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function InAppScreen(props) {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
@@ -79,7 +78,7 @@ export default function App() {
           />
           <Tab.Screen
             name="Discover"
-            component={DiscoverScreeen}
+            component={DiscoverScreen}
             options={{ headerShown: false, tabBarShowLabel: false }}
           />
           <Tab.Screen
@@ -98,6 +97,8 @@ export default function App() {
   );
 }
 
+export default InAppScreen;
+
 const styles = StyleSheet.create({
   iconBG: {
     alignSelf: "stretch",
@@ -105,33 +106,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-
+    //elevation: 10,
     borderLeftWidth: 1,
-
+    borderRightWidth: 1,
     borderColor: colors.grey,
   },
 });
-
-/*
-
-would be nice to 
-- have a soundeffect like turning a page when tapping on a card
-- have 5 star rating system / community favourites
-- option to record a story
-- option to add user created stories
-*/
-
-/*</View>
-<WelcomeScreen />
-<MainMenu />
-
-
-    <BookReadingScreen
-      storyTitle={"Story title"}
-      storyText={"Thius is a nabdfjksahf basic test with no special characters"}
-      storyCover={
-        "https://i.pinimg.com/564x/43/5e/0a/435e0a6ea7c12a7dd38834da6915150c.jpg"
-      }
-    />
-
-*/

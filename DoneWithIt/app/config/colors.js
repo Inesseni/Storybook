@@ -8,5 +8,8 @@ export default {
   yellow: "#F6BD60",
   white: "#fff",
   black: "#000",
+  grey: "lightgrey",
+  darkgrey: "#9c9c9c",
+
   background: "#F7EDE2",
 };

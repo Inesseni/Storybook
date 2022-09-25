@@ -1,68 +1,65 @@
-import React from "react";
-import {
-  FlatList,
-  Text,
-  StyleSheet,
-  Platform,
-  StatusBar,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { FlatList, TextInput, StyleSheet, View, Text } from "react-native";
 import Card from "../components/Card";
 import UserWidget from "../components/UserWidget";
 import colors from "../config/colors";
 import SpaceInBetween from "../components/SpaceInBetween";
+import NavbarBottom from "../components/NavbarBottom";
+import FilterOptions from "../components/FilterOptions";
 
 const stories = [
   {
     id: 1,
     title: "The little prince",
+    author: "Mac Mustermac",
     description:
       "The adventures of the little prince and his friends, escaping the castle and playing in the forbidden forest.",
     image: require("../assets/Story1.jpg"),
+    rating: 5,
     bookmarked: true,
   },
   {
     id: 2,
     title: "Maria and the brave knights",
+    author: "Keanu Reeves",
     description:
       "Nobody can enter the castle, only if your name is Buddy and you have four paws and a wet nose.",
     image: require("../assets/Story2.jpg"),
-    bookmarked: false,
+    rating: 3,
+    bookmarked: true,
   },
   {
     id: 3,
     title: "Treasure island",
+    author: "J.K. Howling",
     description:
       "Go on a crazy pirate adventure with Joanne and Fitus, the orange cat.",
     image: require("../assets/Story3.jpg"),
-    bookmarked: false,
-  },
-  {
-    id: 4,
-    title: "Story 4",
-    description: "D4",
-    image: require("../assets/Story4.jpg"),
+    rating: 4,
     bookmarked: false,
   },
 ];
 
-function MainMenu(props) {
+function DiscoverScreen(props) {
+  const [firstName, setFirstName] = useState("");
   return (
-    <View>
-      <SpaceInBetween gap={60} color={colors.white} />
-
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      {/** 
       <UserWidget
         userName={"Ines"}
         userStats={5}
         userPicture={require("../assets/userPic.jpg")}
-      />
+      />*/}
+      <View style={{ height: 100, width: "100%" }}>
+        <FilterOptions />
+      </View>
       <FlatList
-        style={styles.listContainer}
         data={stories}
         keyExtractor={(stories) => stories.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
+            author={item.author}
             description={item.description}
             image={item.image}
             onPress={() => console.log("story selected", item)}
@@ -75,10 +72,6 @@ function MainMenu(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  listContainer: {
-    backgroundColor: colors.background,
-  },
-});
+const styles = StyleSheet.create({});
 
-export default MainMenu;
+export default DiscoverScreen;

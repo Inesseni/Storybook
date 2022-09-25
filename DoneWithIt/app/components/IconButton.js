@@ -4,7 +4,14 @@ import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function IconButton({ Icon, I_size, BG_Color, I_color, text, onPress }) {
+function IconButton({
+  Icon,
+  I_size = 20,
+  BG_Color,
+  I_color = colors.white,
+  text,
+  onPress,
+}) {
   return (
     <TouchableOpacity style={styles.widgetBox} onPress={onPress}>
       <View style={[styles.iconBG, { backgroundColor: BG_Color }]}>
