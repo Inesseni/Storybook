@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { FlatList, TextInput, StyleSheet, View, Text } from "react-native";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 import Card from "../components/Card";
-import UserWidget from "../components/UserWidget";
 import colors from "../config/colors";
-import SpaceInBetween from "../components/SpaceInBetween";
-import NavbarBottom from "../components/NavbarBottom";
 import FilterOptions from "../components/FilterOptions";
 
 const stories = [
@@ -26,7 +23,7 @@ const stories = [
       "Nobody can enter the castle, only if your name is Buddy and you have four paws and a wet nose.",
     image: require("../assets/Story2.jpg"),
     rating: 3,
-    bookmarked: true,
+    bookmarked: false,
   },
   {
     id: 3,
@@ -53,6 +50,7 @@ function DiscoverScreen(props) {
       <View style={{ height: 100, width: "100%" }}>
         <FilterOptions />
       </View>
+
       <FlatList
         data={stories}
         keyExtractor={(stories) => stories.id.toString()}

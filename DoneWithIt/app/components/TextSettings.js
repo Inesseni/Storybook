@@ -1,12 +1,28 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Button,
+} from "react-native";
 import colors from "../config/colors";
 import Slider from "@react-native-community/slider";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SpaceInBetween from "./SpaceInBetween";
+import FontPicker from "./FontPicker";
+import FontSizeSlider from "./FontSizeSlider";
+
+const fonts = [
+  { label: "Arial", value: 1 },
+  { label: "Verdana", value: 2 },
+  { label: "Sans Serif", value: 3 },
+];
 
 function TextSettings(props) {
   const [sliderValue, setSliderValue] = useState(18);
+  const [font, setFont] = useState();
+
   return (
     <View style={[styles.settingsSection, { backgroundColor: colors.white }]}>
       <Text style={styles.settingsHeadline}>Text settings</Text>
@@ -20,7 +36,7 @@ function TextSettings(props) {
       >
         <Text
           style={{
-            fontSize: 10,
+            fontSize: 15,
             flex: 1,
           }}
         >
@@ -36,42 +52,10 @@ function TextSettings(props) {
         <Text style={{ fontSize: 30, flex: 2, textAlign: "right" }}>Aa</Text>
       </View>
 
-      <View
-        style={{
-          borderWidth: 1,
-          borderColor: "grey",
-          backgroundColor: colors.white,
-          borderRadius: 20,
-          paddingHorizontal: 10,
-          paddingLeft: 20,
+      <FontSizeSlider />
+      <FontPicker defaultFont={"Arial"} style={{ width: 500 }} />
 
-          height: 35,
-          marginTop: 10,
-          marginBottom: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text>Arial</Text>
-        <MaterialCommunityIcons
-          name={"arrow-down-drop-circle"}
-          size={20}
-          color={"grey"}
-        />
-      </View>
-
-      <View
-        style={{
-          borderWidth: 0,
-          borderColor: "grey",
-          backgroundColor: colors.grey,
-          borderRadius: 10,
-          padding: 10,
-          minHeight: 140,
-          marginTop: 10,
-        }}
-      >
+      <View style={styles.previewTextBox}>
         <Text style={{ fontSize: sliderValue }}>
           This is an example text, how it will look like.
         </Text>
@@ -95,5 +79,14 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.grey,
     borderBottomWidth: 1,
     marginBottom: 5,
+  },
+  previewTextBox: {
+    borderWidth: 0,
+    borderColor: "grey",
+    backgroundColor: colors.grey,
+    borderRadius: 10,
+    padding: 10,
+    minHeight: 140,
+    marginTop: 10,
   },
 });

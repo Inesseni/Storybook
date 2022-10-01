@@ -28,13 +28,11 @@ export default IconButton;
 
 const styles = StyleSheet.create({
   widgetBox: {
-    marginTop: 2,
     flexDirection: "row",
     backgroundColor: colors.white,
     padding: 10,
     elevation: 5,
   },
-  icon: {},
   iconBG: {
     height: 40,
     width: 40,

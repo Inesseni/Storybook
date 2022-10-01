@@ -47,12 +47,16 @@ export default function App() {
 
               if (route.name === "Home") {
                 iconName = focused ? "bookshelf" : "bookshelf";
+                color = focused ? colors.red : colors.darkgrey;
               } else if (route.name === "Discover") {
                 iconName = focused ? "magnify" : "magnify";
+                color = focused ? colors.red : colors.darkgrey;
               } else if (route.name === "Recordings") {
                 iconName = focused ? "microphone-plus" : "microphone-plus";
+                color = focused ? colors.red : colors.darkgrey;
               } else if (route.name === "Settings") {
                 iconName = focused ? "pencil" : "pencil";
+                color = focused ? colors.red : colors.darkgrey;
               }
 
               // You can return any component that you like here!
@@ -62,7 +66,7 @@ export default function App() {
                     <MaterialCommunityIcons
                       name={iconName}
                       size={25}
-                      color={colors.red}
+                      color={color}
                     />
                   </View>
                 </>
@@ -113,6 +117,11 @@ const styles = StyleSheet.create({
 });
 
 /*
+
+QUESTIONS:
+How can i set a "global" variable with the slider like TextSize ?
+
+
 
 would be nice to 
 - have a soundeffect like turning a page when tapping on a card
