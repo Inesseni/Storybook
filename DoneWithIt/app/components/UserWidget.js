@@ -6,7 +6,7 @@ import UserIcon from "./UserIcon";
 function UserWidget({ userName, userStats, userPicture }) {
   return (
     <View style={styles.widgetBox}>
-      <UserIcon userPicture={require("../assets/userPic.jpg")} size={70} />
+      <UserIcon userPicture={require("../assets/userPic.jpg")} size={100} />
       <View style={styles.userInfo}>
         <Text style={styles.name}>{userName}</Text>
         <Text>{userStats} Books finished</Text>

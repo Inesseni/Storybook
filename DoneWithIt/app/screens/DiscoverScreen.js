@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, View, Text } from "react-native";
 import Card from "../components/Card";
 import colors from "../config/colors";
 import FilterOptions from "../components/FilterOptions";
+import { useNavigation } from "@react-navigation/native";
 
 const stories = [
   {
@@ -38,7 +39,7 @@ const stories = [
 ];
 
 function DiscoverScreen(props) {
-  const [firstName, setFirstName] = useState("");
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       {/** 
@@ -60,7 +61,11 @@ function DiscoverScreen(props) {
             author={item.author}
             description={item.description}
             image={item.image}
-            onPress={() => console.log("story selected", item)}
+            onPress={() =>
+              navigation.navigate("Story", {
+                title: item.title,
+              })
+            }
             margin={15}
             bookmarked={item.bookmarked}
           />

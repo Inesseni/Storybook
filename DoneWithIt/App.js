@@ -13,6 +13,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SpaceInBetween from "./app/components/SpaceInBetween";
@@ -35,68 +39,84 @@ function SettingsScreen() {
 }
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const iconNames = {
+  Home: "bookshelf",
+  Discover: "magnify",
+  Recordings: "microphone-plus",
+  Settings: "pencil",
+};
+
+const TabNav = () => (
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused }) => (
+        <View style={[styles.iconBG]}>
+          <MaterialCommunityIcons
+            name={iconNames[route.name]}
+            size={25}
+            color={focused ? colors.red : colors.darkgrey}
+          />
+        </View>
+      ),
+      tabBarActiveTintColor: "transparent",
+      tabBarInactiveTintColor: "transparent",
+    })}
+  >
+    <Tab.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{ headerShown: false, tabBarShowLabel: false }}
+    />
+    <Tab.Screen
+      name="Discover"
+      component={DiscoverScreeen}
+      options={{ headerShown: false, tabBarShowLabel: false }}
+    />
+    <Tab.Screen
+      name="Recordings"
+      component={RecordingsScreen}
+      options={{ headerShown: false, tabBarShowLabel: false }}
+    />
+    <Tab.Screen
+      name="Settings"
+      component={SettingsScreen}
+      options={{ headerShown: false, tabBarShowLabel: false }}
+    />
+  </Tab.Navigator>
+);
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-
-              if (route.name === "Home") {
-                iconName = focused ? "bookshelf" : "bookshelf";
-                color = focused ? colors.red : colors.darkgrey;
-              } else if (route.name === "Discover") {
-                iconName = focused ? "magnify" : "magnify";
-                color = focused ? colors.red : colors.darkgrey;
-              } else if (route.name === "Recordings") {
-                iconName = focused ? "microphone-plus" : "microphone-plus";
-                color = focused ? colors.red : colors.darkgrey;
-              } else if (route.name === "Settings") {
-                iconName = focused ? "pencil" : "pencil";
-                color = focused ? colors.red : colors.darkgrey;
-              }
-
-              // You can return any component that you like here!
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Tabs"
+            component={TabNav}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Story"
+            options={{
+              ...TransitionPresets.SlideFromRightIOS,
+            }}
+            component={(props) => {
               return (
-                <>
-                  <View style={[styles.iconBG]}>
-                    <MaterialCommunityIcons
-                      name={iconName}
-                      size={25}
-                      color={color}
-                    />
-                  </View>
-                </>
+                <BookReadingScreen
+                  storyTitle={props.route.params.title}
+                  storyText={
+                    "Thius is a nabdfjksahf basic test with no special characters"
+                  }
+                  storyCover={
+                    "https://i.pinimg.com/564x/43/5e/0a/435e0a6ea7c12a7dd38834da6915150c.jpg"
+                  }
+                />
               );
-            },
-            tabBarActiveTintColor: "transparent",
-            tabBarInactiveTintColor: "transparent",
-          })}
-        >
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ headerShown: false, tabBarShowLabel: false }}
+            }}
           />
-          <Tab.Screen
-            name="Discover"
-            component={DiscoverScreeen}
-            options={{ headerShown: false, tabBarShowLabel: false }}
-          />
-          <Tab.Screen
-            name="Recordings"
-            component={RecordingsScreen}
-            options={{ headerShown: false, tabBarShowLabel: false }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{ headerShown: false, tabBarShowLabel: false }}
-          />
-        </Tab.Navigator>
+        </Stack.Navigator>
       </NavigationContainer>
     </View>
   );
