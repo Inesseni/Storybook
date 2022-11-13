@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import IconButton from "../components/IconButton";
 import UserWidget from "../components/UserWidget";
 import SpaceInBetween from "../components/SpaceInBetween";
 import colors from "../config/colors";
-import UserIcon from "../components/UserIcon";
 
 import TextSettings from "../components/TextSettings";
 

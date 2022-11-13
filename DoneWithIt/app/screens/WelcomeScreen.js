@@ -5,12 +5,14 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  Alert,
 } from "react-native";
 
 import AppButton from "../components/AppButton";
 
+import { useNavigation } from "@react-navigation/native";
+
 function WelcomeScreen(props) {
+  const navigation = useNavigation();
   return (
     <ImageBackground
       style={styles.background}
@@ -28,19 +30,11 @@ function WelcomeScreen(props) {
       <AppButton
         title="Login"
         color="secondary"
-        onPress={() => console.log("login")}
+        onPress={() => navigation.navigate("Home")}
       />
-      <AppButton title="Register" onPress={() => console.log("register")} />
+      <AppButton title="Register" onPress={() => navigation.navigate("Home")} />
 
-      <Pressable
-        onPress={() =>
-          Alert.alert(
-            "Skip Login",
-            "Are you sure you want to skip the login? The progress and favourite books will not get saved.",
-            [{ text: "Yes", onPress: () => console.log("Yes") }, { text: "No" }]
-          )
-        }
-      >
+      <Pressable onPress={() => () => navigation.navigate("Home")}>
         <Text style={styles.skipButton}>Skip</Text>
       </Pressable>
     </ImageBackground>

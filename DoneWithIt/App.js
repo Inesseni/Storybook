@@ -22,6 +22,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import SpaceInBetween from "./app/components/SpaceInBetween";
 import FeedScreen from "./app/screens/FeedScreen";
 
+function LoginScreen() {
+  return <WelcomeScreen />;
+}
+
 function HomeScreen() {
   return <FeedScreen />;
 }
@@ -48,6 +52,7 @@ const iconNames = {
   Settings: "pencil",
 };
 
+//TabNavigator not necessary for basic flow, keep for later
 const TabNav = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
@@ -69,6 +74,7 @@ const TabNav = () => (
       component={HomeScreen}
       options={{ headerShown: false, tabBarShowLabel: false }}
     />
+
     <Tab.Screen
       name="Discover"
       component={DiscoverScreeen}
@@ -93,10 +99,26 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={DiscoverScreeen}
+            options={{
+              ...TransitionPresets.SlideFromRightIOS,
+              headerShown: false,
+            }}
+          />
+          {/** 
+            <Stack.Screen
             name="Tabs"
             component={TabNav}
             options={{ headerShown: false }}
-          />
+            />*/}
           <Stack.Screen
             name="Story"
             options={{

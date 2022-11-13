@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import Card from "../components/Card";
 import colors from "../config/colors";
-import FilterOptions from "../components/FilterOptions";
 import { useNavigation } from "@react-navigation/native";
+import LogoutNavBar from "../components/LogoutNavBar";
 
 const stories = [
   {
@@ -49,7 +49,7 @@ function DiscoverScreen(props) {
         userPicture={require("../assets/userPic.jpg")}
       />*/}
       <View style={{ height: 100, width: "100%" }}>
-        <FilterOptions />
+        <LogoutNavBar />
       </View>
 
       <FlatList
