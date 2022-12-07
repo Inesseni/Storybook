@@ -21,6 +21,10 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SpaceInBetween from "./app/components/SpaceInBetween";
 import FeedScreen from "./app/screens/FeedScreen";
+import { useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import APIKey from "./APIKey";
+import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
 function LoginScreen() {
   return <WelcomeScreen />;
@@ -94,6 +98,38 @@ const TabNav = () => (
 );
 
 export default function App() {
+  useEffect(() => {
+    const firebaseConfig = {
+      apiKey: APIKey.APIKey,
+
+      authDomain: "storybook-api-383ce.firebaseapp.com",
+
+      projectId: "storybook-api-383ce",
+
+      storageBucket: "storybook-api-383ce.appspot.com",
+
+      messagingSenderId: "1036780497141",
+
+      appId: "1:1036780497141:web:7932b29cc9b5ac9159bdbc",
+    };
+
+    // Initialize Firebase
+
+    //authentifizierung with firebase here
+    const app = initializeApp(firebaseConfig);
+    //based on authentif. , create instance of firestore database
+    const db = getFirestore(app);
+
+    async function getCities(db) {
+      const storiesCol = collection(db, "stories");
+      const storySnapshot = await getDocs(storiesCol);
+      const storyList = storySnapshot.docs.map((doc) => doc.data());
+      console.log(storyList);
+      return storyList;
+    }
+    getCities(db);
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
