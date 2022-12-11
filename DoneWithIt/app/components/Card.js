@@ -29,7 +29,7 @@ function Card({
         />
       )}
 
-      <Image source={image} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{description}</Text>
@@ -42,6 +42,7 @@ function Card({
           }}
         >
           <Text style={styles.author}>{author}</Text>
+
           <View
             style={{
               flexDirection: "row",
@@ -50,11 +51,13 @@ function Card({
               alignItems: "center",
             }}
           >
+            {/*
             <ReviewStars size={15} />
             <ReviewStars size={15} />
             <ReviewStars size={15} />
             <ReviewStars size={15} />
             <ReviewStars size={15} />
+                    */}
           </View>
         </View>
       </View>

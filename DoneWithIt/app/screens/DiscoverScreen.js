@@ -38,32 +38,27 @@ const stories = [
   },
 ];
 
-function DiscoverScreen(props) {
+function DiscoverScreen({ storiesData }) {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      {/** 
-      <UserWidget
-        userName={"Ines"}
-        userStats={5}
-        userPicture={require("../assets/userPic.jpg")}
-      />*/}
-      <View style={{ height: 100, width: "100%" }}>
-        <LogoutNavBar />
-      </View>
+      <View style={{ height: 50, width: "100%" }}>{/*<LogoutNavBar /> */}</View>
 
       <FlatList
-        data={stories}
-        keyExtractor={(stories) => stories.id.toString()}
+        data={storiesData}
+        keyExtractor={(storiesData) => storiesData.ID}
         renderItem={({ item }) => (
           <Card
-            title={item.title}
-            author={item.author}
-            description={item.description}
-            image={item.image}
+            title={item.Name}
+            author={item.Author}
+            description={item.Description}
+            image={item.img}
             onPress={() =>
               navigation.navigate("Story", {
-                title: item.title,
+                title: item.Name,
+                author: item.Author,
+                storyText: item.Storytext,
+                storyCover: item.img,
               })
             }
             margin={15}

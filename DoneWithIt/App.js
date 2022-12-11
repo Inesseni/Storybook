@@ -4,11 +4,9 @@ import { FlatList, StyleSheet, View, Text } from "react-native";
 import DiscoverScreen from "./app/screens/DiscoverScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-import Card from "./app/components/Card";
 import BookReadingScreen from "./app/screens/BookReadingScreen";
 import MyAccountScreen from "./app/screens/MyAccountScreen";
 import colors from "./app/config/colors";
-import NavbarBottom from "./app/components/NavbarBottom";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -18,86 +16,33 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 
-import Ionicons from "react-native-vector-icons/Ionicons";
-import SpaceInBetween from "./app/components/SpaceInBetween";
 import FeedScreen from "./app/screens/FeedScreen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import APIKey from "./APIKey";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+} from "firebase/firestore/lite";
 
 function LoginScreen() {
   return <WelcomeScreen />;
 }
 
-function HomeScreen() {
-  return <FeedScreen />;
-}
+var myData = [];
 
 function DiscoverScreeen() {
-  return <DiscoverScreen />;
+  console.log(myData);
+  return <DiscoverScreen storiesData={myData} />;
 }
 
-function RecordingsScreen() {
-  return <WelcomeScreen />;
-}
-
-function SettingsScreen() {
-  return <MyAccountScreen />;
-}
-
-const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const iconNames = {
-  Home: "bookshelf",
-  Discover: "magnify",
-  Recordings: "microphone-plus",
-  Settings: "pencil",
-};
-
-//TabNavigator not necessary for basic flow, keep for later
-const TabNav = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused }) => (
-        <View style={[styles.iconBG]}>
-          <MaterialCommunityIcons
-            name={iconNames[route.name]}
-            size={25}
-            color={focused ? colors.red : colors.darkgrey}
-          />
-        </View>
-      ),
-      tabBarActiveTintColor: "transparent",
-      tabBarInactiveTintColor: "transparent",
-    })}
-  >
-    <Tab.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{ headerShown: false, tabBarShowLabel: false }}
-    />
-
-    <Tab.Screen
-      name="Discover"
-      component={DiscoverScreeen}
-      options={{ headerShown: false, tabBarShowLabel: false }}
-    />
-    <Tab.Screen
-      name="Recordings"
-      component={RecordingsScreen}
-      options={{ headerShown: false, tabBarShowLabel: false }}
-    />
-    <Tab.Screen
-      name="Settings"
-      component={SettingsScreen}
-      options={{ headerShown: false, tabBarShowLabel: false }}
-    />
-  </Tab.Navigator>
-);
-
 export default function App() {
+  const [storiesData, setStoriesData] = useState([]);
+
   useEffect(() => {
     const firebaseConfig = {
       apiKey: APIKey.APIKey,
@@ -120,15 +65,38 @@ export default function App() {
     //based on authentif. , create instance of firestore database
     const db = getFirestore(app);
 
-    async function getCities(db) {
+    ////////// Stories laden
+    async function getStories(db) {
       const storiesCol = collection(db, "stories");
       const storySnapshot = await getDocs(storiesCol);
       const storyList = storySnapshot.docs.map((doc) => doc.data());
-      console.log(storyList);
+      //console.log(storyList);
+      setStoriesData(storyList);
       return storyList;
     }
-    getCities(db);
+    getStories(db);
+
+    ////////// neue story hinzufügen
+    async function setStory(db) {
+      //statt add kan man auch set machen und eine ID vergeben, damit nicht ein neues dokument erstellt wird
+      const docRef = await addDoc(collection(db, "stories"), {
+        Author: "Sebastian F.",
+        Name: "Firebase Success",
+        Description:
+          "This is a new story that got uploaded from withing the app into the cloud database!",
+        Storytext:
+          "One day, ines deleted some of the infos by accident, so now she has to generate more stories the easy way like this :)",
+        img: "https://firebasestorage.googleapis.com/v0/b/storybook-api-383ce.appspot.com/o/storyPics%2FStory2.jpg?alt=media&token=6588a5aa-847e-4b6d-8108-08f822ab4187",
+      });
+      console.log(docRef);
+    }
+    //setStory(db);
   }, []);
+
+  useEffect(() => {
+    console.log("haööp");
+    myData = storiesData;
+  }, [storiesData]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -145,16 +113,10 @@ export default function App() {
             name="Home"
             component={DiscoverScreeen}
             options={{
-              ...TransitionPresets.SlideFromRightIOS,
               headerShown: false,
             }}
           />
-          {/** 
-            <Stack.Screen
-            name="Tabs"
-            component={TabNav}
-            options={{ headerShown: false }}
-            />*/}
+
           <Stack.Screen
             name="Story"
             options={{
@@ -164,12 +126,9 @@ export default function App() {
               return (
                 <BookReadingScreen
                   storyTitle={props.route.params.title}
-                  storyText={
-                    "Thius is a nabdfjksahf basic test with no special characters"
-                  }
-                  storyCover={
-                    "https://i.pinimg.com/564x/43/5e/0a/435e0a6ea7c12a7dd38834da6915150c.jpg"
-                  }
+                  author={props.route.params.author}
+                  storyText={props.route.params.storyText}
+                  storyCover={props.route.params.storyCover}
                 />
               );
             }}
